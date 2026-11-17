@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<!--head-start-->
+<title>Steady PCOS Guide</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap">
+<style>
+/* Layout: one quiet column (max 860px), a slim sticky header with five destinations, one view on screen at a time. */
+:root{
+  --bg:#F2F6F5; --surface:#FFFFFF; --sunk:#E8EFED; --line:#D5E0DD;
+  --ink:#1D2C2B; --muted:#5A6C6A;
+  --accent:#2C6E68; --accent-ink:#FFFFFF; --accent-soft:#DCEBE8;
+  --lilac:#6F5F9E; --lilac-soft:#ECE8F5;
+  --ok:#2F7A56; --ok-soft:#DDF0E5;
+  --watch:#8A5B00; --watch-soft:#FBEED2;
+  --alert:#A63D4A; --alert-soft:#F9E1E3;
+  --display:"Fraunces", Georgia, "Times New Roman", serif;
+  --body:"Figtree", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121A19; --surface:#1A2524; --sunk:#16201F; --line:#2C3B39;
+    --ink:#E6EFED; --muted:#9DB0AD;
+    --accent:#7CC4BB; --accent-ink:#0E1F1D; --accent-soft:#213634;
+    --lilac:#B6A8E0; --lilac-soft:#27243A;
+    --ok:#7FCFA3; --ok-soft:#1B3327;
+    --watch:#E8BD6A; --watch-soft:#3A2E14;
+    --alert:#F0959F; --alert-soft:#40212A;
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121A19; --surface:#1A2524; --sunk:#16201F; --line:#2C3B39;
+  --ink:#E6EFED; --muted:#9DB0AD;
+  --accent:#7CC4BB; --accent-ink:#0E1F1D; --accent-soft:#213634;
+  --lilac:#B6A8E0; --lilac-soft:#27243A;
+  --ok:#7FCFA3; --ok-soft:#1B3327;
+  --watch:#E8BD6A; --watch-soft:#3A2E14;
+  --alert:#F0959F; --alert-soft:#40212A;
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+@media (prefers-reduced-motion: reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.2;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.9rem,5vw,2.6rem);letter-spacing:-.01em}
+h2{font-size:1.5rem}
+h3{font-size:1.15rem}
+p{margin:0}
+a{color:var(--accent)}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:6px}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.stack{display:flex;flex-direction:column;gap:16px}
+.stack-lg{display:flex;flex-direction:column;gap:28px}
+.muted{color:var(--muted)}
+.small{font-size:.875rem}
+.eyebrow{font-size:.75rem;letter-spacing:.09em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.prose{max-width:65ch}
+
+/* header */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:var(--bg);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:8px 20px;flex-wrap:wrap;padding-block:10px}
+.brand{font-family:var(--display);font-size:1.2rem;color:var(--ink);text-decoration:none;margin-right:auto;display:flex;align-items:center;gap:8px}
+.brand i{width:10px;height:10px;border-radius:50%;background:var(--accent);display:inline-block}
+nav{display:flex;gap:4px;overflow-x:auto;max-width:100%;scrollbar-width:none}
+nav::-webkit-scrollbar{display:none}
+nav a{white-space:nowrap;text-decoration:none;color:var(--muted);padding:6px 12px;border-radius:999px;font-weight:500;font-size:.925rem}
+nav a:hover{color:var(--ink)}
+nav a[aria-current="page"]{background:var(--accent-soft);color:var(--accent)}
+
+main{padding-block:32px 64px}
+.view{display:none}
+.view.on{display:block}
+
+/* shared pieces */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px}
+.btn{font:inherit;font-weight:600;border-radius:999px;padding:10px 20px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);cursor:pointer;text-decoration:none;display:inline-block}
+.btn.ghost{background:transparent;color:var(--accent)}
+.btn.quiet{border-color:var(--line);background:transparent;color:var(--muted);font-weight:500}
+.btn:hover{filter:brightness(1.06)}
+.row{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.note{background:var(--sunk);border-radius:var(--r);padding:14px 16px;font-size:.9rem;color:var(--muted)}
+.note strong{color:var(--ink)}
+.pill{display:inline-block;font-size:.78rem;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)}
+.pill.watch{background:var(--watch-soft);color:var(--watch)}
+.pill.alert{background:var(--alert-soft);color:var(--alert)}
+.pill.info{background:var(--lilac-soft);color:var(--lilac)}
+
+/* home */
+.hero{padding-block:20px 8px}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:52ch;margin-top:12px}
+.doors{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+@media (max-width:520px){.doors{grid-template-columns:1fr}}
+.door{display:flex;flex-direction:column;gap:6px;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:20px;transition:border-color .15s}
+.door:hover{border-color:var(--accent)}
+.door span{color:var(--muted);font-size:.925rem}
+.door b{font-family:var(--display);font-weight:500;font-size:1.15rem}
+.today{display:flex;gap:16px;align-items:center;flex-wrap:wrap}
+.today p{flex:1;min-width:200px}
+
+/* understand */
+details.topic{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+details.topic>summary{cursor:pointer;list-style:none;padding:16px 20px;font-family:var(--display);font-size:1.15rem;display:flex;justify-content:space-between;gap:12px;align-items:center}
+details.topic>summary::-webkit-details-marker{display:none}
+details.topic>summary::after{content:"+";font-family:var(--body);color:var(--muted);font-size:1.3rem;line-height:1}
+details.topic[open]>summary::after{content:"–"}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;padding:0 20px 20px}
+.two>div{min-width:0;display:flex;flex-direction:column;gap:8px}
+.two .plain{background:var(--accent-soft);border-radius:10px;padding:14px 16px}
+.two .tech{padding:14px 16px;border:1px dashed var(--line);border-radius:10px;font-size:.925rem}
+.two ul{margin:0;padding-left:18px}
+.two li+li{margin-top:4px}
+table.ev{width:100%;border-collapse:collapse;font-size:.925rem}
+table.ev th,table.ev td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+table.ev th{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.scroll{overflow-x:auto}
+
+/* labs */
+.drop{border:1.5px dashed var(--line);border-radius:var(--r);padding:24px;text-align:center;background:var(--surface);display:flex;flex-direction:column;gap:10px;align-items:center}
+.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+textarea,input[type=number],select{font:inherit;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:8px 10px;min-width:0}
+textarea{width:100%;min-height:110px;resize:vertical}
+.entry{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,.9fr) minmax(0,1.3fr) auto;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line)}
+.entry label{font-weight:500}
+.entry .rng{display:flex;gap:4px;align-items:center}
+.entry .rng input{width:100%}
+.entry input,.entry select{width:100%}
+.entry .x{border:0;background:none;color:var(--muted);cursor:pointer;font-size:1.1rem;padding:4px 8px}
+.entry-head{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:6px}
+@media (max-width:620px){
+  .entry{grid-template-columns:1fr 1fr auto}
+  .entry label{grid-column:1/-1}
+  .entry .rng{grid-column:1/3}
+  .entry-head{display:none}
+}
+.res{background:var(--surface);border:1px solid var(--line);border-radius:var(--r)}
+.res>summary{cursor:pointer;list-style:none;padding:14px 18px;display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap}
+.res>summary::-webkit-details-marker{display:none}
+.res>summary b{font-weight:600;margin-right:auto}
+.res>summary .val{font-variant-numeric:tabular-nums;color:var(--muted)}
+.res .body{padding:0 18px 18px;display:flex;flex-direction:column;gap:12px}
+.res .body h4{margin:0 0 2px;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.res .body .tech{font-size:.9rem;color:var(--muted)}
+.insight{border-left:3px solid var(--lilac);background:var(--lilac-soft);padding:12px 16px;border-radius:0 10px 10px 0}
+.insight.alert{border-color:var(--alert);background:var(--alert-soft)}
+ol.ask{margin:0;padding-left:20px}
+ol.ask li+li{margin-top:6px}
+
+/* routine */
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font:inherit;font-size:.9rem;border:1px solid var(--line);background:var(--surface);color:var(--ink);padding:7px 14px;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.day{display:grid;grid-template-columns:110px minmax(0,1fr);gap:0 20px}
+.day>div{padding:18px 0;border-top:1px solid var(--line)}
+.day .when{font-family:var(--display);font-size:1.1rem}
+.day .when small{display:block;font-family:var(--body);color:var(--muted);font-size:.8rem}
+.day ul{margin:0;padding-left:18px}
+.day li+li{margin-top:8px}
+.day li span{color:var(--muted);font-size:.9rem;display:block}
+.day li.em{background:var(--accent-soft);border-radius:8px;margin-left:-10px;padding:6px 10px;list-style-position:inside}
+@media (max-width:560px){.day{grid-template-columns:1fr}.day .when{padding-bottom:0}.day .what{border-top:0;padding-top:8px}}
+
+/* goals */
+.goal{display:flex;gap:12px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--line)}
+.goal:last-child{border-bottom:0}
+.goal input{width:20px;height:20px;margin-top:3px;accent-color:var(--accent);flex:none}
+.goal label{cursor:pointer}
+.goal label span{display:block;color:var(--muted);font-size:.9rem}
+.goal input:checked+label b{text-decoration:line-through;text-decoration-color:var(--muted);font-weight:500}
+.bar{height:8px;background:var(--sunk);border-radius:999px;overflow:hidden}
+.bar i{display:block;height:100%;background:var(--accent);border-radius:999px;width:0;transition:width .3s}
+.closing{background:var(--lilac-soft);border-radius:var(--r);padding:32px 24px;text-align:center}
+.closing blockquote{margin:0 auto;max-width:34ch;font-family:var(--display);font-size:1.35rem;line-height:1.4;text-wrap:balance}
+.closing p{margin-top:12px;color:var(--muted);font-size:.9rem}
+ul.src{margin:0;padding-left:18px}
+ul.src li+li{margin-top:10px}
+footer{border-top:1px solid var(--line);padding-block:20px 28px;color:var(--muted);font-size:.85rem}
+</style>
+<!--head-end-->
+</head>
+<body>
+<!--body-start-->
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#home"><i></i>Steady</a>
+    <nav aria-label="Sections">
+      <a href="#home">Home</a>
+      <a href="#understand">Understand</a>
+      <a href="#labs">My labs</a>
+      <a href="#routine">Daily routine</a>
+      <a href="#goals">Goals</a>
+      <a href="#sources">Sources</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+
+<!-- ================= HOME ================= -->
+<section class="view stack-lg" id="v-home">
+  <div class="hero">
+    <p class="eyebrow" id="greet">Welcome</p>
+    <h1>One calm place for adrenal&#8209;pattern PCOS.</h1>
+    <p>What is happening in your body, what your lab results mean, and what helps day to day. Built on the 2023 International PCOS Guideline, without the noise.</p>
+  </div>
+  <div class="doors">
+    <a class="door" href="#understand"><b>Understand it</b><span>Each topic in plain words, with the clinical version beside it.</span></a>
+    <a class="door" href="#labs"><b>Read my labs</b><span>Upload or type in results and get each number explained.</span></a>
+    <a class="door" href="#routine"><b>A day that helps</b><span>A realistic routine, adjusted to what your labs show.</span></a>
+    <a class="door" href="#goals"><b>My goals</b><span>A short list to work through at your own pace.</span></a>
+  </div>
+  <div class="card today">
+    <p><b id="home-progress">Today's small steps</b><br><span class="muted small" id="home-progress-sub">Nothing ticked yet. One is plenty to start.</span></p>
+    <a class="btn ghost" href="#goals">Open goals</a>
+  </div>
+  <p class="note">This guide explains and organises. It does not diagnose or replace your doctor, and your own lab's reference ranges always take priority over the general ones used here.</p>
+</section>
+
+<!-- ================= UNDERSTAND ================= -->
+<section class="view stack-lg" id="v-understand">
+  <div class="stack">
+    <h1>Understand it</h1>
+    <p class="muted prose">Open one topic at a time. The shaded box says it simply; the outlined box gives the clinical wording you may see in articles or hear at appointments.</p>
+  </div>
+  <div class="stack" id="topics"></div>
+
+  <div class="stack">
+    <h2>What works, and how sure we are</h2>
+    <p class="muted prose">Sorted by strength of evidence, so you can stop weighing every article against every other one.</p>
+    <div class="card scroll">
+      <table class="ev">
+        <thead><tr><th>Approach</th><th>What it helps</th><th>Evidence</th></tr></thead>
+        <tbody>
+          <tr><td><b>Combined oral contraceptive pill</b></td><td>Regular bleeds, acne, unwanted hair, protects the womb lining. First-line medicine in the guideline; no single brand is preferred, lower doses favoured.</td><td><span class="pill ok">Strong</span></td></tr>
+          <tr><td><b>Regular movement and balanced eating</b></td><td>Insulin sensitivity, mood, sleep, long-term heart and diabetes risk. No specific diet has been shown to beat another, so the best pattern is one you can keep.</td><td><span class="pill ok">Strong</span></td></tr>
+          <tr><td><b>Metformin</b></td><td>Mainly metabolic features: glucose, insulin resistance, sometimes cycles. Start low and increase slowly to limit stomach upset; B12 is worth checking on long-term use.</td><td><span class="pill ok">Strong</span></td></tr>
+          <tr><td><b>Anti-androgens</b> (such as spironolactone)</td><td>Unwanted hair and acne when the pill alone has not been enough after about six months. Must be paired with reliable contraception, as they can harm a male fetus.</td><td><span class="pill ok">Good</span></td></tr>
+          <tr><td><b>Laser or light hair removal</b></td><td>Unwanted hair, alongside medical treatment.</td><td><span class="pill ok">Good</span></td></tr>
+          <tr><td><b>Mental health care</b></td><td>Anxiety and depression are more common with PCOS, and treating them improves quality of life in its own right.</td><td><span class="pill ok">Good</span></td></tr>
+          <tr><td><b>Sleep and stress care</b></td><td>Mood, energy, appetite regulation and insulin sensitivity. Not shown to lower DHEA-S itself.</td><td><span class="pill watch">Supportive</span></td></tr>
+          <tr><td><b>Inositol</b></td><td>The guideline found limited clinical benefit and judged metformin more effective. Low risk if you want to try it; tell your doctor.</td><td><span class="pill watch">Limited</span></td></tr>
+          <tr><td><b>Vitamin D</b></td><td>Worth correcting if a blood test shows it is low. Not a PCOS treatment in itself.</td><td><span class="pill watch">Limited</span></td></tr>
+          <tr><td><b>Low-dose steroids to suppress the adrenals</b></td><td>They do lower DHEA-S, but side effects outweigh benefit in PCOS. Reserved for non-classic CAH.</td><td><span class="pill alert">Not advised</span></td></tr>
+          <tr><td><b>"Adrenal cocktails", adaptogen stacks, type-based supplement protocols</b></td><td>No reliable trials in PCOS. Some herbs interact with medicines or affect the liver.</td><td><span class="pill alert">Unproven</span></td></tr>
+          <tr><td><b>Avoiding all intense exercise "because of cortisol"</b></td><td>The guideline recommends moderate or vigorous activity. Choose what feels good and sustainable.</td><td><span class="pill alert">Unproven</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="card stack" style="border-color:var(--alert)">
+    <h3>When to contact a doctor soon</h3>
+    <ul style="margin:0;padding-left:18px">
+      <li>Hair growth, acne or scalp hair loss that appears or worsens quickly over weeks to months, a deepening voice, or increased muscle bulk.</li>
+      <li>No period for three months or more when you are not on hormonal contraception, or very heavy or prolonged bleeding.</li>
+      <li>Easy bruising, purple stretch marks, or new muscle weakness in the thighs and upper arms.</li>
+      <li>Low mood, anxiety or eating worries that are getting in the way of daily life. If you ever have thoughts of harming yourself, contact your local emergency number or a crisis line straight away.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ================= LABS ================= -->
+<section class="view stack-lg" id="v-labs">
+  <div class="stack">
+    <h1>My labs</h1>
+    <p class="muted prose">Add a report, check the numbers were read correctly, then get each one explained. Everything stays in this browser on this device. Nothing is uploaded anywhere.</p>
+  </div>
+
+  <div class="stack">
+    <h2>1. Add your results</h2>
+    <div class="drop" id="drop">
+      <b>Drop a lab report here</b>
+      <span class="muted small">PDF or text file from your patient portal. Scanned or photographed reports cannot be read, so type those in below.</span>
+      <div class="row" style="justify-content:center">
+        <label class="btn" for="file">Choose a file</label>
+        <input type="file" id="file" accept=".pdf,.txt,.csv,application/pdf,text/plain" hidden>
+        <button class="btn ghost" id="btn-example" type="button">Try example values</button>
+      </div>
+      <span class="small" id="file-msg" role="status"></span>
+    </div>
+    <details>
+      <summary class="muted" style="cursor:pointer">Or paste the text of a report</summary>
+      <div class="stack" style="margin-top:10px">
+        <textarea id="paste" placeholder="Paste results here, for example:&#10;DHEA-Sulfate 412 ug/dL 110-431&#10;Testosterone, Total 48 ng/dL"></textarea>
+        <div><button class="btn ghost" id="btn-paste" type="button">Read pasted text</button></div>
+      </div>
+    </details>
+  </div>
+
+  <div class="stack">
+    <h2>2. Check the numbers</h2>
+    <p class="muted small prose">Fix anything that was read wrongly. If your report prints a reference range next to a result, enter it. Your lab's range is more accurate than a general one.</p>
+    <div class="card">
+      <div class="entry entry-head"><span>Test</span><span>Result</span><span>Unit</span><span>Your lab's range (optional)</span><span></span></div>
+      <div id="entries"></div>
+      <div class="row" style="margin-top:14px">
+        <select id="add-marker" aria-label="Add another test"></select>
+        <button class="btn quiet" id="btn-clear" type="button">Clear all</button>
+      </div>
+    </div>
+    <label class="row small"><input type="checkbox" id="on-hc"> I was taking hormonal birth control when this blood was drawn</label>
+    <div><button class="btn" id="btn-read" type="button">Explain my results</button></div>
+  </div>
+
+  <div class="stack" id="results" hidden>
+    <h2>3. What your results say</h2>
+    <p class="note" id="example-flag" hidden><strong>These are example values, not yours.</strong> Clear them and add your own when you are ready.</p>
+    <div class="stack" id="insights"></div>
+    <div class="stack" id="res-list"></div>
+    <div class="card stack" id="ask-card" hidden>
+      <h3>Questions to bring to your appointment</h3>
+      <ol class="ask" id="ask-list"></ol>
+      <div class="row"><button class="btn ghost" id="btn-copy" type="button">Copy questions</button><span class="small muted" id="copy-msg" role="status"></span></div>
+    </div>
+    <div class="row"><a class="btn" href="#routine">See a day that fits these results</a></div>
+    <p class="note">A single blood test is a snapshot. Hormones shift with time of day, cycle phase, illness, sleep and medicines, so one result outside a range is a reason for a conversation, not a conclusion.</p>
+  </div>
+</section>
+
+<!-- ================= ROUTINE ================= -->
+<section class="view stack-lg" id="v-routine">
+  <div class="stack">
+    <h1>A day that helps</h1>
+    <p class="muted prose">A template, not a rulebook. Pick what your labs or symptoms point to and the matching parts of the day are highlighted.</p>
+    <div class="chips" id="chips" role="group" aria-label="What to emphasise"></div>
+    <p class="small muted" id="chip-note"></p>
+  </div>
+  <div class="card"><div class="day" id="day"></div></div>
+  <div class="card stack" id="focus-card" hidden>
+    <h3>If this level is off, here is what to lean on</h3>
+    <div class="stack" id="focus-text"></div>
+  </div>
+</section>
+
+<!-- ================= GOALS ================= -->
+<section class="view stack-lg" id="v-goals">
+  <div class="stack">
+    <h1>Goals</h1>
+    <p class="muted prose">Three kinds of goal: groundwork to do once with your doctor, small daily steps, and a weekly rhythm. Daily ticks reset each morning; nobody is keeping score.</p>
+    <div class="bar" aria-hidden="true"><i id="bar"></i></div>
+    <p class="small muted" id="goal-count"></p>
+  </div>
+  <div id="goal-groups" class="stack"></div>
+  <div class="closing">
+    <blockquote>Your body is not working against you. It is asking for steadiness, and you are already learning how to give it.</blockquote>
+    <p>Small, repeated care adds up. Today counts.</p>
+  </div>
+</section>
+
+<!-- ================= SOURCES ================= -->
+<section class="view stack-lg" id="v-sources">
+  <div class="stack">
+    <h1>Sources</h1>
+    <p class="muted prose">Where the information here comes from, and what to keep in mind when reading it.</p>
+  </div>
+  <div class="card">
+    <ul class="src">
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10505534/" target="_blank" rel="noopener">Teede HJ et al. Recommendations from the 2023 International Evidence-based Guideline for the Assessment and Management of PCOS</a>. The main basis for diagnosis, screening and treatment statements.</li>
+      <li><a href="https://mchri.org.au/wp-content/uploads/2023/08/Algorithms.pdf" target="_blank" rel="noopener">Monash University / MCHRI: guideline algorithms</a>. Diagnostic pathway, cycle definitions, androgen testing.</li>
+      <li><a href="https://www.mja.com.au/journal/2024/221/7/summary-2023-international-evidence-based-guideline-assessment-and-management" target="_blank" rel="noopener">Medical Journal of Australia: summary of the 2023 guideline</a>.</li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/25008465/" target="_blank" rel="noopener">Goodarzi MO, Carmina E, Azziz R. DHEA, DHEAS and PCOS (2015)</a>. Adrenal androgen excess in roughly 20–30% of people with PCOS; cause still unclear.</li>
+      <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC7041698" target="_blank" rel="noopener">Non-classic congenital adrenal hyperplasia: screening with 17-hydroxyprogesterone</a>. Basis for the 200 and 1000 ng/dL (6 and 30 nmol/L) thresholds.</li>
+      <li><a href="https://www.mayocliniclabs.com/test-catalog/overview/113595" target="_blank" rel="noopener">Mayo Clinic Laboratories test catalog</a>. General reference intervals; your own lab's printed range takes priority.</li>
+      <li><a href="https://pubmed.ncbi.nlm.nih.gov/27877043/" target="_blank" rel="noopener">PCOS and mental health: systematic review and meta-analysis</a>.</li>
+    </ul>
+  </div>
+  <div class="note stack">
+    <p><strong>About the term "adrenal PCOS".</strong> It is not a formal medical diagnosis. It is a useful shorthand for PCOS in which the adrenal androgen DHEA-S is raised. Treatment follows the same guideline as any PCOS, with extra care taken to rule out adrenal conditions that look similar.</p>
+    <p><strong>About reference ranges.</strong> Ranges differ between laboratories and testing methods, especially for testosterone and DHEA-S. General ranges here are approximations for women in their early twenties.</p>
+    <p><strong>About this guide.</strong> It is educational. Decisions about tests and treatment belong with you and your clinician.</p>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">Steady is an educational guide based on published clinical guidelines. It is not medical advice.</div></footer>
+
+<script>
+(function(){
+"use strict";
+var $=function(s,r){return (r||document).querySelector(s)}, $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
+var store={get:function(k,d){try{var v=localStorage.getItem("steady."+k);return v?JSON.parse(v):d}catch(e){return d}},set:function(k,v){try{localStorage.setItem("steady."+k,JSON.stringify(v))}catch(e){}}};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+
+/* ---------- routing ---------- */
+var VIEWS=["home","understand","labs","routine","goals","sources"];
+function route(){
+  var h=(location.hash||"").replace("#","");
+  if(VIEWS.indexOf(h)<0)h="home";
+  VIEWS.forEach(function(v){$("#v-"+v).classList.toggle("on",v===h)});
+  $$("nav a").forEach(function(a){if(a.getAttribute("href")==="#"+h)a.setAttribute("aria-current","page");else a.removeAttribute("aria-current")});
+  if(h==="routine")renderRoutine();
+  if(h==="home"||h==="goals")renderGoals();
+  window.scrollTo(0,0);
+}
+window.addEventListener("hashchange",route);
+
+var hr=new Date().getHours();
+$("#greet").textContent=hr<12?"Good morning":hr<18?"Good afternoon":"Good evening";
+
+/* ---------- understand ---------- */
+var TOPICS=[
+{t:'What "adrenal PCOS" means',
+ p:'<p>PCOS is a common hormone condition. "Adrenal PCOS" is an informal name for the version where the extra androgens ("male-type" hormones everyone has) come mostly from the adrenal glands, the two small glands above the kidneys, instead of mostly from the ovaries.</p><p>It is not a separate disease. It is PCOS with a particular lab pattern: a raised DHEA-S.</p>',
+ c:'<p>PCOS is diagnosed in adults when two of three are present, after other causes are excluded: (1) clinical or biochemical hyperandrogenism, (2) ovulatory dysfunction, (3) polycystic ovarian morphology on ultrasound or an elevated AMH.</p><p>Adrenal androgen excess, marked by elevated DHEA-S, is found in roughly 20–30% of people with PCOS. "Adrenal PCOS" is not a guideline category and does not change the diagnostic criteria.</p>'},
+{t:"Where the hormones come from",
+ p:'<p>Your brain sends a signal (ACTH) to the adrenal glands. In response they make cortisol, and alongside it a hormone called DHEA, stored in the blood as DHEA-S. The body can turn DHEA into testosterone in the skin and hair follicles.</p><p>DHEA-S is made almost only by the adrenals, which is why doctors use it as the "adrenal" marker.</p>',
+ c:'<p>ACTH from the pituitary stimulates the adrenal zona reticularis to produce DHEA, DHEA-S and androstenedione. Over 95% of circulating DHEA-S is adrenal in origin. These precursors undergo peripheral conversion to testosterone and dihydrotestosterone (DHT) in the pilosebaceous unit.</p><p>Why adrenal output is higher in some people with PCOS is not settled; it may reflect an inherited, generalised increase in androgen synthesis.</p>'},
+{t:"Conditions that must be ruled out first",
+ p:'<p>A few other conditions look almost identical to adrenal-pattern PCOS but are treated differently. A good work-up checks for them once, usually with simple blood tests:</p><ul><li>A mild inherited enzyme condition of the adrenals (non-classic CAH)</li><li>Thyroid problems</li><li>High prolactin</li><li>Too much cortisol (Cushing syndrome), which is rare</li><li>Hormone-producing growths, which are very rare</li></ul><p>If these have been checked and are normal, you can stop worrying about them.</p>',
+ c:'<ul><li><b>Non-classic congenital adrenal hyperplasia (21-hydroxylase deficiency):</b> early-morning, follicular-phase 17-hydroxyprogesterone. Below 200 ng/dL (6 nmol/L) makes it unlikely; 200–1000 ng/dL warrants an ACTH stimulation test; a stimulated value above 1000 ng/dL (30 nmol/L) is diagnostic.</li><li><b>Thyroid disease:</b> TSH.</li><li><b>Hyperprolactinaemia:</b> prolactin.</li><li><b>Cushing syndrome:</b> only if clinical features suggest it; 1 mg overnight dexamethasone suppression, late-night salivary cortisol or 24-hour urinary free cortisol.</li><li><b>Androgen-secreting tumour:</b> suspected with rapid onset or virilisation, total testosterone well above the female range (commonly cited above 150–200 ng/dL) or DHEA-S above about 700 µg/dL.</li></ul>'},
+{t:"Symptoms and why they happen",
+ p:'<p>Extra androgens act on skin and hair: more hair on the face or body, acne, and sometimes thinning hair on the scalp. They can also interrupt ovulation, so periods become irregular or far apart.</p><p>Tiredness, low mood and anxiety are common too. They are real, they are linked with PCOS, and they deserve attention in their own right.</p>',
+ c:'<p>Hirsutism, acne and female-pattern hair loss reflect androgen action at the pilosebaceous unit; severity correlates poorly with serum levels. Ovulatory dysfunction presents as cycles shorter than 21 or longer than 35 days, or fewer than eight cycles a year.</p><p>Prevalence of moderate to severe depressive and anxiety symptoms is higher than in the general population; the guideline recommends routine screening for both, and awareness of disordered eating and body image distress.</p>'},
+{t:"Insulin and metabolism",
+ p:'<p>Many people with PCOS respond less well to insulin, at any body size. The body compensates by making more insulin, and high insulin nudges androgen levels up and makes more of the testosterone "active".</p><p>This is the part of PCOS that daily habits influence most: movement, sleep and steady meals all improve how the body handles insulin.</p>',
+ c:'<p>Insulin resistance and compensatory hyperinsulinaemia are present in a majority, independent of but exacerbated by higher BMI. Insulin augments ovarian and adrenal androgen production and suppresses hepatic SHBG, raising free testosterone.</p><p>Screening: glycaemic status at diagnosis and then every one to three years depending on risk, with a 75 g OGTT as the most accurate test (fasting glucose or HbA1c if an OGTT is not feasible); lipid profile at diagnosis; blood pressure yearly.</p>'},
+{t:"Stress, cortisol and the adrenal link",
+ p:'<p>You will read that stress causes adrenal PCOS. That has not been proven. What is known: the same brain signal drives both cortisol and DHEA, and ongoing stress and poor sleep make mood, cravings and insulin resistance worse.</p><p>So calming the nervous system is worth doing for how you feel, even though it is not a cure. "Adrenal fatigue" is not a recognised medical condition, and tests sold to diagnose it are not needed.</p>',
+ c:'<p>ACTH is the common trophic stimulus for cortisol and adrenal androgens, and some studies show exaggerated adrenal androgen response to ACTH in PCOS. A causal role for psychological stress in adrenal hyperandrogenism has not been established, and no trial shows stress reduction lowers DHEA-S.</p><p>Sleep restriction and chronic stress do worsen insulin sensitivity and mental health outcomes, which are treatment targets in the guideline. Obstructive sleep apnoea is more common in PCOS and should be considered when symptoms suggest it.</p>'},
+{t:"Long-term health and fertility",
+ p:'<p>PCOS is lifelong but very manageable. Three things are worth keeping an eye on over the years: blood sugar, cholesterol and blood pressure; the lining of the womb, which needs a bleed at least every three months or protection from hormonal treatment; and emotional wellbeing.</p><p>Most people with PCOS who want children are able to have them, sometimes with help to ovulate.</p>',
+ c:'<p>PCOS carries increased risk of impaired glucose tolerance, type 2 diabetes, dyslipidaemia and cardiovascular disease. Chronic anovulation with unopposed oestrogen raises the risk of endometrial hyperplasia; cycles longer than 90 days warrant assessment and endometrial protection (combined pill, cyclical progestogen or a levonorgestrel IUD).</p><p>Infertility in PCOS is predominantly anovulatory and usually responds to ovulation induction; letrozole is first-line.</p>'}
+];
+$("#topics").innerHTML=TOPICS.map(function(x,i){return '<details class="topic"'+(i===0?" open":"")+'><summary>'+esc(x.t)+'</summary><div class="two"><div class="plain"><span class="eyebrow">In plain words</span>'+x.p+'</div><div class="tech"><span class="eyebrow">Clinical detail</span>'+x.c+'</div></div></details>'}).join("");
+$$("details.topic").forEach(function(d){d.addEventListener("toggle",function(){if(d.open)$$("details.topic").forEach(function(o){if(o!==d)o.open=false})})});
+
+/* ---------- lab markers ---------- */
+/* units: first is the base unit; f converts the listed unit to base (multiply). */
+function tier(v,steps){for(var i=0;i<steps.length;i++){if(steps[i][0](v))return steps[i].slice(1)}return ["ok","","In usual range"]}
+var MARKERS=[
+{id:"dheas",name:"DHEA-S",core:1,re:/dhea[\s-]*s(ulfate|ulphate|o4)?\b|dehydroepiandrosterone/i,
+ units:[["µg/dL",1,/[uµμ]g\/dl|mcg\/dl/i],["µmol/L",36.85,/[uµμ]mol\/l/i]],lo:65,hi:380,
+ hard:function(v){return v>=700?["alert","high","Very high: needs prompt follow-up"]:null},
+ tech:"Dehydroepiandrosterone sulfate, the sulfated storage form of DHEA; over 95% adrenal in origin, so it is the standard marker of adrenal androgen output. Typical range for women in their early twenties is roughly 65–380 µg/dL, varying by lab.",
+ plain:"The main hormone that shows how much androgen your adrenal glands are making. This is the number behind the phrase \"adrenal PCOS\".",
+ high:"A raised DHEA-S means your adrenal glands are contributing to the androgen excess. Mild to moderate elevation is common in PCOS. Levels above about 700 µg/dL are unusual and need imaging of the adrenal glands to rule out a growth.",
+ highHelp:"No habit reliably lowers DHEA-S by itself. What treats its effects: the combined pill and, if needed, an anti-androgen for hair and acne. Sleep, movement and stress care support how you feel and reduce insulin's amplifying effect.",
+ low:"A low DHEA-S is rarely a concern on its own. It can be seen with steroid medicines (including some inhalers and creams) or the combined pill.",
+ ask:"My DHEA-S is raised. Has non-classic CAH been ruled out with a morning 17-hydroxyprogesterone?"},
+{id:"ohp",name:"17-hydroxyprogesterone",core:1,re:/17[\s-]*(alpha[\s-]*)?(oh|hydroxy)[\s-]*p(rogesterone|rog)?|17[\s-]*ohp/i,
+ units:[["ng/dL",1,/ng\/dl/i],["ng/mL",100,/ng\/ml|[uµμ]g\/l/i],["nmol/L",33.05,/nmol\/l/i]],lo:null,hi:200,
+ hard:function(v){return v>=1000?["alert","high","Strongly suggests non-classic CAH"]:v>=200?["watch","high","Needs a follow-up test"]:["ok","","Reassuring"]},
+ tech:"Precursor that accumulates in 21-hydroxylase deficiency. Screening test for non-classic congenital adrenal hyperplasia, valid when drawn early morning in the follicular phase. Below 200 ng/dL makes NCCAH unlikely; 200–1000 warrants ACTH stimulation; above 1000 is highly suggestive.",
+ plain:"The test that checks for a mild inherited adrenal condition (non-classic CAH) that can look exactly like adrenal PCOS. It needs to be taken in the morning, in the first days after a period starts.",
+ high:"A raised result does not confirm anything yet. It rises naturally after ovulation, so timing matters. The usual next step is an ACTH stimulation test, which gives a clear answer.",
+ highHelp:"Ask when in your cycle and at what time the blood was drawn, and whether an ACTH stimulation test is the next step. Treatment for non-classic CAH is different from PCOS, so this is worth settling.",
+ low:"",ask:"My 17-hydroxyprogesterone was above 200 ng/dL. Should I have an ACTH stimulation test?"},
+{id:"freet",name:"Free testosterone",re:/free[\s,]+testosterone|testosterone[,\s]+free|testosterone[,\s]+bioavail/i,
+ units:[["pg/mL",1,/pg\/ml/i],["ng/dL",10,/ng\/dl/i],["pmol/L",0.288,/pmol\/l/i]],lo:null,hi:null,
+ tech:"The unbound, biologically active fraction. Reference ranges differ several-fold between methods (equilibrium dialysis, calculated, direct immunoassay), so only the reporting lab's range is meaningful. The guideline advises calculated free testosterone or equilibrium dialysis over direct immunoassay.",
+ plain:"The small share of testosterone that is free to act on skin and hair. Labs measure it in very different ways, so compare it only with the range printed on your report.",
+ high:"More active testosterone is available to skin and hair follicles. This is one of the two blood results the guideline relies on to confirm high androgens.",
+ highHelp:"The combined pill raises SHBG, which binds testosterone and lowers the free amount. Improving insulin sensitivity through movement and steady meals also raises SHBG.",
+ low:"Low free testosterone is not usually a concern in this setting.",ask:"My free testosterone is raised. Which treatment options fit my symptoms and plans?"},
+{id:"tt",name:"Total testosterone",core:1,re:/testosterone/i,
+ units:[["ng/dL",1,/ng\/dl/i],["nmol/L",28.84,/nmol\/l/i],["ng/mL",100,/ng\/ml/i]],lo:8,hi:60,
+ hard:function(v){return v>=150?["alert","high","Well above range: needs prompt follow-up"]:null},
+ tech:"Sum of bound and free testosterone, mainly of ovarian and peripheral origin. Best measured by LC-MS/MS; typical adult female range is about 8–60 ng/dL. Values above roughly 150–200 ng/dL raise concern for an androgen-secreting tumour.",
+ plain:"All the testosterone in your blood. In adrenal-pattern PCOS it is often normal or only slightly high while DHEA-S is the one that stands out.",
+ high:"Mildly raised total testosterone is typical of PCOS. A value several times the upper limit is not typical and should be looked into quickly.",
+ highHelp:"The combined pill is first-line. An anti-androgen can be added for hair or acne if the pill has not been enough after about six months, always with reliable contraception.",
+ low:"Low total testosterone is not usually a concern here.",ask:"Was my testosterone measured by LC-MS/MS, and was I off hormonal contraception when it was tested?"},
+{id:"shbg",name:"SHBG",re:/shbg|sex[\s-]*hormone[\s-]*binding/i,units:[["nmol/L",1,/nmol\/l/i]],lo:18,hi:144,
+ tech:"Sex hormone-binding globulin, a liver protein that binds testosterone. Suppressed by insulin; raised by oral oestrogen and thyroid hormone. Low SHBG increases the free androgen fraction and is a marker of insulin resistance.",
+ plain:"A protein that holds on to testosterone and keeps it inactive. Less of it means more active testosterone.",
+ high:"High SHBG is expected on the combined pill and is generally helpful, as it lowers active testosterone.",highHelp:"Nothing to do. This is usually a treatment effect.",
+ low:"Low SHBG lets more testosterone act on skin and hair, and it often points to insulin resistance.",
+ lowHelp:"Anything that improves insulin sensitivity tends to raise SHBG: regular movement, strength work, steady meals, enough sleep. The combined pill raises it directly.",
+ ask:"My SHBG is low. Should my glucose be checked with an oral glucose tolerance test?"},
+{id:"a4",name:"Androstenedione",re:/androstenedione/i,units:[["ng/dL",1,/ng\/dl/i],["ng/mL",100,/ng\/ml/i],["nmol/L",28.65,/nmol\/l/i]],lo:30,hi:200,
+ tech:"Androgen precursor from both ovary and adrenal. The guideline suggests it can be considered when testosterone is not elevated, noting poorer specificity.",
+ plain:"A building-block hormone made by both ovaries and adrenals. A back-up test when testosterone looks normal.",
+ high:"Supports the picture of high androgens, but does not show which gland they come from.",highHelp:"Managed the same way as other raised androgens.",low:"Not usually a concern.",ask:""},
+{id:"cort",name:"Cortisol (morning blood)",re:/cortisol/i,units:[["µg/dL",1,/[uµμ]g\/dl|mcg\/dl/i],["nmol/L",0.03625,/nmol\/l/i]],lo:5,hi:25,
+ tech:"Total serum cortisol peaks around 7–9 am. A single random value cannot diagnose or exclude Cushing syndrome or adrenal insufficiency. Oral oestrogen raises cortisol-binding globulin and therefore total cortisol.",
+ plain:"The body's main stress and wake-up hormone. It swings a lot through the day, so one reading says very little.",
+ high:"Often explained by the time of day, a stressful blood draw, poor sleep, or the combined pill. A single high reading does not mean Cushing syndrome.",
+ highHelp:"If you have signs such as easy bruising, purple stretch marks or muscle weakness, ask about a proper screening test. Otherwise no action is usually needed.",
+ low:"A low morning cortisol should be discussed with your doctor, especially if you use steroid medicines or feel faint, weak or unusually tired.",lowHelp:"Ask whether a repeat morning test or an ACTH stimulation test is needed.",
+ ask:"My cortisol was outside the range. Does it need repeating or a formal screening test?"},
+{id:"prl",name:"Prolactin",re:/prolactin/i,units:[["ng/mL",1,/ng\/ml|[uµμ]g\/l/i],["mIU/L",0.0472,/m[i]?u\/l/i]],lo:null,hi:25,
+ hard:function(v){return v>=100?["alert","high","Markedly high: needs follow-up"]:null},
+ tech:"Pituitary hormone; hyperprolactinaemia causes oligo-amenorrhoea and must be excluded before diagnosing PCOS. Mild elevations occur with stress, exercise, sleep, nipple stimulation and several medicines.",
+ plain:"A hormone from the pituitary gland. When high it can stop periods, so it is checked to make sure it is not the real cause.",
+ high:"Mild rises are often from stress, recent exercise or certain medicines, and are usually repeated before anything else is done.",highHelp:"Ask about a repeat test, taken rested and fasting, and a review of your medicines.",low:"Not a concern.",
+ ask:"My prolactin was raised. Should it be repeated?"},
+{id:"tsh",name:"TSH",core:1,re:/\btsh\b|thyroid[\s-]*stim/i,units:[["mIU/L",1,/./]],lo:0.4,hi:4.0,
+ tech:"Thyroid-stimulating hormone. Thyroid dysfunction causes menstrual irregularity and is excluded as part of the PCOS work-up.",
+ plain:"The thyroid check. Thyroid problems can disrupt periods and energy, so they are ruled out first.",
+ high:"May indicate an underactive thyroid, which can cause tiredness, weight change and irregular periods.",highHelp:"Usually repeated with a free T4 and thyroid antibodies before any treatment.",
+ low:"May indicate an overactive thyroid.",lowHelp:"Usually repeated with free T4 and free T3.",ask:"My TSH is outside the range. Should my thyroid be looked at further?"},
+{id:"lh",name:"LH",re:/\blh\b|luteini[sz]ing/i,units:[["IU/L",1,/./]],lo:null,hi:null,
+ tech:"Luteinising hormone varies widely across the cycle. An elevated LH:FSH ratio is common in PCOS but is not a diagnostic criterion.",
+ plain:"One of the two brain signals that run the ovaries. It changes through the month, so it is only read alongside where you were in your cycle.",high:"",low:"",ask:""},
+{id:"fsh",name:"FSH",re:/\bfsh\b|follicle[\s-]*stim/i,units:[["IU/L",1,/./]],lo:null,hi:null,
+ hard:function(v){return v>=25?["watch","high","Higher than expected"]:["info","","Depends on cycle day"]},
+ tech:"Follicle-stimulating hormone. Persistently elevated FSH (above about 25 IU/L) with absent periods suggests primary ovarian insufficiency rather than PCOS.",
+ plain:"The other brain signal to the ovaries. Mostly checked to make sure the ovaries are responding normally.",
+ high:"A high FSH with missed periods points away from PCOS and should be repeated.",highHelp:"Ask for a repeat test in four to six weeks along with oestradiol.",low:"",ask:"My FSH was high. Should it be repeated?"},
+{id:"amh",name:"AMH",re:/\bamh\b|anti[\s-]*m[uü]llerian/i,units:[["ng/mL",1,/ng\/ml/i],["pmol/L",0.14,/pmol\/l/i]],lo:null,hi:null,
+ tech:"Anti-Müllerian hormone reflects the number of small ovarian follicles. Since 2023 an elevated AMH can stand in for ultrasound as the third diagnostic criterion in adults (not adolescents). Cut-offs are assay-specific.",
+ plain:"A hormone made by small follicles in the ovaries. It is often high in PCOS and can now be used in place of an ultrasound for diagnosis in adults.",
+ high:"A high AMH fits with PCOS. It does not, by itself, say anything about your ability to conceive.",highHelp:"No action needed for the number itself.",low:"",ask:""},
+{id:"a1c",name:"HbA1c",core:1,re:/a1c|glycated|glycosylated|glycoh(a)?emoglobin/i,units:[["%",1,/%/],["mmol/mol",null,/mmol\/mol/i]],lo:null,hi:5.6,
+ conv:function(v,u){return u==="mmol/mol"?v*0.0915+2.15:v},
+ hard:function(v){return v>=6.5?["alert","high","In the diabetes range"]:v>=5.7?["watch","high","In the prediabetes range"]:["ok","","In usual range"]},
+ tech:"Glycated haemoglobin, reflecting average glucose over about three months. Below 5.7% normal; 5.7–6.4% prediabetes; 6.5% or above consistent with diabetes when confirmed. Less sensitive than an OGTT in PCOS.",
+ plain:"Your average blood sugar over roughly the last three months.",
+ high:"Blood sugar has been running higher than ideal. In PCOS this reflects insulin resistance, and it responds well to early action.",
+ highHelp:"Daily movement (a walk after meals counts), strength work twice a week, meals built around protein, fibre and whole foods, and good sleep. Ask about metformin, which is recommended for metabolic features of PCOS.",
+ low:"",ask:"My HbA1c is raised. Should I have an oral glucose tolerance test, and is metformin right for me?"},
+{id:"ogtt",name:"Glucose, 2-hour (OGTT)",re:/(2[\s-]*h(ou)?r?s?\b|120[\s-]*min).{0,25}glucose|glucose.{0,25}(2[\s-]*h(ou)?r?s?\b|120[\s-]*min|tolerance)/i,
+ units:[["mg/dL",1,/mg\/dl/i],["mmol/L",18.016,/mmol\/l/i]],lo:null,hi:139,
+ hard:function(v){return v>=200?["alert","high","In the diabetes range"]:v>=140?["watch","high","Impaired glucose tolerance"]:["ok","","In usual range"]},
+ tech:"Plasma glucose two hours after a 75 g oral glucose load. Below 140 mg/dL normal; 140–199 impaired glucose tolerance; 200 or above consistent with diabetes. The guideline regards the OGTT as the most accurate test of glycaemic status in PCOS.",
+ plain:"Blood sugar two hours after a sugary drink. It shows how well your body clears sugar, and it catches problems that fasting tests miss.",
+ high:"Your body is clearing sugar more slowly than expected after a meal.",
+ highHelp:"The same steps as for a raised HbA1c, with extra value from a 10 to 15 minute walk after meals. Ask about metformin.",low:"",ask:"My 2-hour glucose is raised. What follow-up and treatment do you recommend?"},
+{id:"glu",name:"Fasting glucose",core:1,re:/glucose/i,units:[["mg/dL",1,/mg\/dl/i],["mmol/L",18.016,/mmol\/l/i]],lo:70,hi:99,
+ hard:function(v){return v>=126?["alert","high","In the diabetes range"]:v>=100?["watch","high","In the prediabetes range"]:v<70?["watch","low","Below usual range"]:["ok","","In usual range"]},
+ tech:"Fasting plasma glucose. Below 100 mg/dL normal; 100–125 impaired fasting glucose; 126 or above consistent with diabetes when confirmed. Can be normal despite significant insulin resistance.",
+ plain:"Blood sugar after not eating overnight. It can look normal even when insulin is working hard behind the scenes.",
+ high:"Fasting sugar is higher than ideal, a sign of insulin resistance.",
+ highHelp:"Daily movement, strength work, meals with protein and fibre, fewer sugary drinks, and consistent sleep. Ask about an OGTT and metformin.",
+ low:"A low fasting value is usually harmless if you feel well. Mention it if you get shaky, sweaty or faint.",lowHelp:"Regular meals with protein help keep levels steady.",
+ ask:"My fasting glucose is raised. Should I have an oral glucose tolerance test?"},
+{id:"ins",name:"Fasting insulin",re:/\binsulin\b(?![\s-]*like)/i,units:[["µIU/mL",1,/[uµμ]?iu\/ml|m[i]?u\/l/i],["pmol/L",0.144,/pmol\/l/i]],lo:2,hi:20,
+ tech:"Not standardised between assays and not recommended for diagnosing PCOS or insulin resistance in routine care. Sometimes combined with glucose as HOMA-IR.",
+ plain:"How much insulin your body needs to keep fasting sugar normal. Helpful as a rough guide only, since labs measure it differently.",
+ high:"Your body is making extra insulin to keep blood sugar steady, a sign of insulin resistance. High insulin also pushes androgen levels up.",
+ highHelp:"The most habit-responsive part of PCOS: movement most days, strength work, protein and fibre at each meal, and enough sleep.",low:"Not usually a concern.",
+ ask:"My fasting insulin is high. Would metformin help in my case?"},
+{id:"ldl",name:"LDL cholesterol",re:/^(?!.*ratio).*\bldl/i,units:[["mg/dL",1,/mg\/dl/i],["mmol/L",38.67,/mmol\/l/i]],lo:null,hi:99,
+ hard:function(v){return v>=160?["alert","high","High"]:v>=100?["watch","high","A little above ideal"]:["ok","","In usual range"]},
+ tech:"Low-density lipoprotein cholesterol. Below 100 mg/dL optimal; 160 or above high. Dyslipidaemia is more common in PCOS; a lipid profile is recommended at diagnosis.",
+ plain:"The cholesterol that builds up in artery walls over decades. Lower is better.",
+ high:"Higher than ideal for long-term heart health.",highHelp:"More fibre (oats, beans, vegetables), unsaturated fats in place of saturated fats, regular aerobic activity. Recheck as your doctor advises.",low:"",ask:"My LDL is raised. How often should my cholesterol be rechecked?"},
+{id:"hdl",name:"HDL cholesterol",re:/^(?!.*ratio)(?:.*[^-\w])?hdl/i,units:[["mg/dL",1,/mg\/dl/i],["mmol/L",38.67,/mmol\/l/i]],lo:50,hi:null,
+ tech:"High-density lipoprotein cholesterol. Below 50 mg/dL in women is a metabolic risk marker, often seen with insulin resistance.",
+ plain:"The protective cholesterol. For this one, higher is better.",high:"",
+ low:"Lower than ideal, which often goes together with insulin resistance.",lowHelp:"Regular aerobic exercise is the most reliable way to raise HDL. Not smoking helps too.",ask:""},
+{id:"tg",name:"Triglycerides",re:/triglycerid/i,units:[["mg/dL",1,/mg\/dl/i],["mmol/L",88.57,/mmol\/l/i]],lo:null,hi:149,
+ hard:function(v){return v>=500?["alert","high","Very high"]:v>=150?["watch","high","Above ideal"]:["ok","","In usual range"]},
+ tech:"Fasting triglycerides below 150 mg/dL are normal. Elevation is closely tied to insulin resistance; oral oestrogen can also raise levels.",
+ plain:"Fat carried in the blood. It rises with insulin resistance, sugary drinks and alcohol.",
+ high:"Higher than ideal, usually a sign of insulin resistance.",highHelp:"Cut back sugary drinks and refined carbohydrate, limit alcohol, move most days, and eat oily fish once or twice a week.",low:"",ask:"My triglycerides are raised. Could the pill I am on be contributing?"},
+{id:"chol",name:"Total cholesterol",re:/^(?!.*(non[\s-]*hdl|vldl|ratio)).*cholesterol/i,units:[["mg/dL",1,/mg\/dl/i],["mmol/L",38.67,/mmol\/l/i]],lo:null,hi:199,
+ tech:"Sum of all cholesterol fractions. Below 200 mg/dL desirable. LDL, HDL and triglycerides are more informative.",
+ plain:"All cholesterol types added together. The breakdown matters more than the total.",
+ high:"Above the desirable level. Look at LDL and HDL to see what is driving it.",highHelp:"See LDL and triglycerides.",low:"",ask:""},
+{id:"vitd",name:"Vitamin D (25-OH)",re:/vitamin\s*d[23]?\b(.{0,6}25[\s-]*(oh|hydroxy)\w*)?|25[\s-]*(oh|hydroxy)\w*(\s*vitamin\s*d\w*)?/i,
+ units:[["ng/mL",1,/ng\/ml/i],["nmol/L",0.4006,/nmol\/l/i]],lo:20,hi:100,
+ hard:function(v){return v<12?["alert","low","Deficient"]:v<20?["watch","low","Low"]:v>100?["watch","high","Higher than needed"]:["ok","","Adequate"]},
+ tech:"25-hydroxyvitamin D. Below 12 ng/mL deficient; 12–20 inadequate; 20 ng/mL or above adequate for most people (some labs flag below 30). Low levels are common in PCOS; supplementation corrects deficiency but is not an established PCOS treatment.",
+ plain:"Your vitamin D store. Low levels are common and easy to correct.",
+ high:"More than the body needs, usually from high-dose supplements.",highHelp:"Check the dose of any supplement with your doctor or pharmacist.",
+ low:"Low vitamin D affects bones, muscles and mood.",lowHelp:"A daily supplement at the dose your doctor recommends, plus some daylight. Recheck after about three months.",
+ ask:"My vitamin D is low. What dose should I take and for how long?"},
+{id:"b12",name:"Vitamin B12",re:/\bb[\s-]*12\b|cobalamin/i,units:[["pg/mL",1,/pg\/ml|ng\/l/i],["pmol/L",1.355,/pmol\/l/i]],lo:200,hi:null,
+ hard:function(v){return v<200?["alert","low","Low"]:v<300?["watch","low","Borderline"]:["ok","","In usual range"]},
+ tech:"Long-term metformin use can reduce B12 absorption; the guideline notes monitoring is worth considering.",
+ plain:"A vitamin for nerves and blood. Worth watching if you take metformin.",high:"",
+ low:"Low B12 can cause tiredness, tingling and low mood.",lowHelp:"Ask about supplements or injections, and whether metformin is a factor.",ask:"My B12 is low. Is this related to metformin, and how should it be replaced?"},
+{id:"prog",name:"Progesterone",re:/progesterone/i,units:[["ng/mL",1,/ng\/ml/i],["nmol/L",0.3145,/nmol\/l/i]],lo:null,hi:null,
+ hard:function(v){return v>=3?["info","","Suggests ovulation occurred"]:["info","","Depends on cycle day"]},
+ tech:"A mid-luteal progesterone above about 3 ng/mL (10 nmol/L) indicates recent ovulation. Uninformative at other cycle times.",
+ plain:"The hormone made after ovulation. Taken about a week before a period, it shows whether you ovulated that cycle.",high:"",low:"",ask:""}
+];
+var BYID={};MARKERS.forEach(function(m){BYID[m.id]=m});
+
+/* ---------- entry state ---------- */
+var entries=store.get("labs",null);
+var isExample=store.get("example",false);
+function blank(id){return {id:id,v:"",u:BYID[id].units[0][0],lo:"",hi:""}}
+if(!entries||!entries.length)entries=MARKERS.filter(function(m){return m.core}).map(function(m){return blank(m.id)});
+$("#on-hc").checked=!!store.get("hc",false);
+
+function saveEntries(){store.set("labs",entries);store.set("example",isExample);store.set("hc",$("#on-hc").checked)}
+function renderEntries(){
+  $("#entries").innerHTML=entries.map(function(e,i){
+    var m=BYID[e.id];
+    var opts=m.units.map(function(u){return '<option'+(u[0]===e.u?" selected":"")+'>'+u[0]+'</option>'}).join("");
+    return '<div class="entry" data-i="'+i+'"><label for="v-'+m.id+'">'+esc(m.name)+'</label>'+
+      '<input type="number" inputmode="decimal" step="any" id="v-'+m.id+'" data-f="v" value="'+esc(e.v)+'" placeholder="–">'+
+      '<select id="u-'+m.id+'" data-f="u" aria-label="Unit for '+esc(m.name)+'"'+(m.units.length<2?" disabled":"")+'>'+opts+'</select>'+
+      '<span class="rng"><input type="number" inputmode="decimal" step="any" id="lo-'+m.id+'" data-f="lo" value="'+esc(e.lo)+'" placeholder="low" aria-label="Lab range low for '+esc(m.name)+'"><span class="muted">–</span><input type="number" inputmode="decimal" step="any" id="hi-'+m.id+'" data-f="hi" value="'+esc(e.hi)+'" placeholder="high" aria-label="Lab range high for '+esc(m.name)+'"></span>'+
+      '<button class="x" type="button" data-rm="'+i+'" aria-label="Remove '+esc(m.name)+'">×</button></div>';
+  }).join("");
+  var used={};entries.forEach(function(e){used[e.id]=1});
+  $("#add-marker").innerHTML='<option value="">Add another test…</option>'+MARKERS.filter(function(m){return !used[m.id]}).map(function(m){return '<option value="'+m.id+'">'+esc(m.name)+'</option>'}).join("");
+}
+$("#entries").addEventListener("input",function(ev){
+  var row=ev.target.closest(".entry");if(!row||!ev.target.dataset.f)return;
+  entries[+row.dataset.i][ev.target.dataset.f]=ev.target.value;isExample=false;saveEntries();
+});
+$("#entries").addEventListener("change",function(ev){
+  var row=ev.target.closest(".entry");if(!row||ev.target.dataset.f!=="u")return;
+  entries[+row.dataset.i].u=ev.target.value;saveEntries();
+});
+$("#entries").addEventListener("click",function(ev){
+  var b=ev.target.closest("[data-rm]");if(!b)return;
+  entries.splice(+b.dataset.rm,1);saveEntries();renderEntries();
+});
+$("#add-marker").addEventListener("change",function(){
+  if(!this.value)return;entries.push(blank(this.value));saveEntries();renderEntries();
+  var el=$("#v-"+entries[entries.length-1].id);if(el)el.focus();
+});
+$("#on-hc").addEventListener("change",saveEntries);
+$("#btn-clear").addEventListener("click",function(){
+  entries=MARKERS.filter(function(m){return m.core}).map(function(m){return blank(m.id)});isExample=false;
+  saveEntries();renderEntries();$("#results").hidden=true;$("#file-msg").textContent="";
+});
+
+/* ---------- parsing ---------- */
+function parseText(txt){
+  var out=[],seen={};
+  txt.split(/\r?\n/).forEach(function(line){
+    if(line.length>220)return;
+    for(var k=0;k<MARKERS.length;k++){
+      var m=MARKERS[k];
+      var r=m.re.exec(line);if(!r)continue;
+      if(seen[m.id])break;
+      var rest=line.slice(r.index+r[0].length);
+      var n=/(\d+(?:\.\d+)?)/.exec(rest.replace(/(\d),(\d)/g,"$1.$2"));
+      if(!n)break;
+      rest=rest.replace(/(\d),(\d)/g,"$1.$2");
+      var after=rest.slice(n.index+n[0].length);
+      var unit=m.units[0][0];
+      for(var j=0;j<m.units.length;j++){if(m.units.length>1&&m.units[j][2].test(after)){unit=m.units[j][0];break}}
+      var e={id:m.id,v:n[1],u:unit,lo:"",hi:""};
+      var rg=/(\d+(?:\.\d+)?)\s*(?:-|–|—|to)\s*(\d+(?:\.\d+)?)/.exec(after);
+      if(rg){e.lo=rg[1];e.hi=rg[2]}
+      else{var lt=/(?:<|<=|≤|less than)\s*(\d+(?:\.\d+)?)/i.exec(after);if(lt)e.hi=lt[1];var gt=/(?:>|>=|≥|greater than)\s*(\d+(?:\.\d+)?)/i.exec(after);if(gt)e.lo=gt[1]}
+      seen[m.id]=1;out.push(e);break;
+    }
+  });
+  return out;
+}
+function applyParsed(found,label){
+  var msg=$("#file-msg");
+  if(!found.length){msg.textContent="No recognisable results were found in "+label+". If it is a scan or photo, type the values in below.";return}
+  var byId={};entries.forEach(function(e,i){byId[e.id]=i});
+  found.forEach(function(e){if(byId[e.id]!=null)entries[byId[e.id]]=e;else entries.push(e)});
+  isExample=false;saveEntries();renderEntries();
+  msg.textContent="Found "+found.length+" result"+(found.length>1?"s":"")+" in "+label+". Please check them below.";
+  $("#results").hidden=true;
+}
+var pdfLoading=null;
+function loadPdfJs(){
+  if(window.pdfjsLib)return Promise.resolve();
+  if(!pdfLoading)pdfLoading=new Promise(function(ok,no){
+    var s=document.createElement("script");s.src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js";
+    s.onload=function(){window.pdfjsLib.GlobalWorkerOptions.workerSrc="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";ok()};
+    s.onerror=function(){pdfLoading=null;no(new Error("load"))};document.head.appendChild(s);
+  });
+  return pdfLoading;
+}
+function pdfToText(buf){
+  return window.pdfjsLib.getDocument({data:buf}).promise.then(function(doc){
+    var pages=[];for(var p=1;p<=doc.numPages;p++)pages.push(p);
+    return pages.reduce(function(chain,p){
+      return chain.then(function(acc){return doc.getPage(p).then(function(pg){return pg.getTextContent()}).then(function(tc){
+        var rows={};
+        tc.items.forEach(function(it){if(!it.str)return;var y=Math.round(it.transform[5]/3);(rows[y]=rows[y]||[]).push({x:it.transform[4],s:it.str})});
+        var lines=Object.keys(rows).sort(function(a,b){return b-a}).map(function(y){return rows[y].sort(function(a,b){return a.x-b.x}).map(function(i){return i.s}).join(" ")});
+        return acc+lines.join("\n")+"\n";
+      })});
+    },Promise.resolve(""));
+  });
+}
+function handleFile(f){
+  var msg=$("#file-msg");if(!f)return;
+  var isPdf=/pdf$/i.test(f.type)||/\.pdf$/i.test(f.name);
+  if(/^image\//.test(f.type)){msg.textContent="Photos and scans cannot be read here. Type the values in below; it takes a minute.";return}
+  msg.textContent="Reading "+f.name+"…";
+  var rd=new FileReader();
+  rd.onerror=function(){msg.textContent="That file could not be opened. Try pasting the text instead."};
+  if(isPdf){
+    rd.onload=function(){
+      loadPdfJs().then(function(){return pdfToText(new Uint8Array(rd.result))}).then(function(t){applyParsed(parseText(t),f.name)})
+      .catch(function(){msg.textContent="The PDF reader could not load or open this file. Paste the report text or type the values in below."});
+    };rd.readAsArrayBuffer(f);
+  }else{rd.onload=function(){applyParsed(parseText(String(rd.result)),f.name)};rd.readAsText(f)}
+}
+$("#file").addEventListener("change",function(){handleFile(this.files[0]);this.value=""});
+var drop=$("#drop");
+["dragenter","dragover"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.add("over")})});
+["dragleave","drop"].forEach(function(t){drop.addEventListener(t,function(e){e.preventDefault();drop.classList.remove("over")})});
+drop.addEventListener("drop",function(e){handleFile(e.dataTransfer.files[0])});
+$("#btn-paste").addEventListener("click",function(){applyParsed(parseText($("#paste").value),"the pasted text")});
+$("#btn-example").addEventListener("click",function(){
+  entries=[{id:"dheas",v:"468",u:"µg/dL",lo:"110",hi:"432"},{id:"tt",v:"52",u:"ng/dL",lo:"",hi:""},{id:"shbg",v:"21",u:"nmol/L",lo:"",hi:""},
+    {id:"glu",v:"92",u:"mg/dL",lo:"",hi:""},{id:"ins",v:"19",u:"µIU/mL",lo:"",hi:""},{id:"a1c",v:"5.4",u:"%",lo:"",hi:""},
+    {id:"tsh",v:"1.8",u:"mIU/L",lo:"",hi:""},{id:"vitd",v:"17",u:"ng/mL",lo:"",hi:""}];
+  isExample=true;saveEntries();renderEntries();$("#file-msg").textContent="Example values loaded.";explain();
+});
+
+/* ---------- interpretation ---------- */
+function toBase(m,v,u){
+  if(m.conv)return m.conv(v,u);
+  for(var i=0;i<m.units.length;i++)if(m.units[i][0]===u)return v*m.units[i][1];
+  return v;
+}
+function assess(e){
+  var m=BYID[e.id],v=toBase(m,parseFloat(e.v),e.u);
+  var lo=e.lo!==""?toBase(m,parseFloat(e.lo),e.u):null,hi=e.hi!==""?toBase(m,parseFloat(e.hi),e.u):null;
+  var own=lo!=null||hi!=null;
+  var s=null;
+  if(m.hard)s=m.hard(v);
+  if(!s){
+    var L=own?lo:m.lo,H=own?hi:m.hi;
+    if(L==null&&H==null)s=["info","","Compare with your lab's range"];
+    else if(H!=null&&v>H)s=["watch","high","Above range"];
+    else if(L!=null&&v<L)s=["watch","low","Below range"];
+    else s=["ok","","In usual range"];
+  }
+  return {m:m,e:e,v:v,lvl:s[0],dir:s[1],label:s[2],own:own};
+}
+function fmt(n){return (Math.round(n*10)/10).toString()}
+var lastAsk=[];
+function explain(){
+  var rs=entries.filter(function(e){return e.v!==""&&!isNaN(parseFloat(e.v))}).map(assess);
+  var box=$("#results");
+  if(!rs.length){$("#file-msg").textContent="Enter at least one result first.";box.hidden=true;return}
+  var by={};rs.forEach(function(r){by[r.m.id]=r});
+  var hc=$("#on-hc").checked,ins=[],ask=[];
+
+  var off=rs.filter(function(r){return r.lvl==="watch"||r.lvl==="alert"});
+  var alerts=rs.filter(function(r){return r.lvl==="alert"});
+  if(alerts.length)ins.push(["alert","<b>Worth a prompt conversation.</b> "+alerts.map(function(r){return esc(r.m.name)}).join(" and ")+(alerts.length>1?" are":" is")+" further outside the range than is typical. This is a reason to contact your doctor soon, and it has an explanation far more often than not."]);
+  else if(!off.length)ins.push(["","<b>Everything you entered sits within the usual ranges.</b> That is good news. Symptoms still count even when blood tests look normal, so keep talking with your doctor about how you feel."]);
+  else ins.push(["","<b>"+off.length+" of "+rs.length+" results "+(off.length>1?"are":"is")+" outside the usual range.</b> Each one is explained below, with what tends to help."]);
+
+  if(by.dheas&&by.dheas.dir==="high"){
+    var tNorm=!by.tt||by.tt.dir!=="high";
+    ins.push(["","<b>An adrenal-led pattern.</b> DHEA-S is raised"+(by.tt?(tNorm?" while total testosterone is in range":" along with testosterone"):"")+". This is the picture people mean by \"adrenal PCOS\": the adrenal glands are a main source of the extra androgens."]);
+    if(!by.ohp){ins.push(["","<b>One test to ask about.</b> 17-hydroxyprogesterone is not in these results. It screens for non-classic CAH, which looks the same as adrenal-pattern PCOS but is treated differently."]);ask.push("Has a morning, early-cycle 17-hydroxyprogesterone been done to rule out non-classic CAH?")}
+  }
+  if(by.tt&&by.shbg){
+    var fai=by.tt.v*0.0347/by.shbg.v*100;
+    ins.push(["","<b>Free androgen index: "+fmt(fai)+".</b> Calculated from total testosterone and SHBG. Many labs treat a value above about 5 as raised in women; it estimates how much testosterone is active."+(fai>5?" Yours is above that mark.":" Yours is below that mark.")]);
+  }
+  if(by.glu&&by.ins){
+    var homa=by.glu.v*by.ins.v/405;
+    ins.push(["","<b>HOMA-IR: "+fmt(homa)+".</b> A rough estimate of insulin resistance from fasting glucose and insulin. There is no agreed cut-off; values above about 2 to 2.5 are often read as some insulin resistance."+(homa>=2.5?" Yours suggests your body is working harder than usual to keep sugar steady, even with a normal glucose.":"")]);
+    if(homa>=2.5)ask.push("My glucose is normal but my insulin looks high. Would an oral glucose tolerance test be useful?");
+  }
+  if(by.lh&&by.fsh)ins.push(["","<b>About LH and FSH.</b> A higher LH than FSH is common in PCOS, but the ratio is not used for diagnosis, and both shift through the cycle."]);
+  if(hc)ins.push(["","<b>Tested on hormonal birth control.</b> Androgen results (testosterone, DHEA-S, SHBG) are not reliable while on it, and total cortisol reads high. If a diagnosis depends on these, ask about retesting after a break agreed with your doctor."]);
+
+  $("#insights").innerHTML=ins.map(function(i){return '<div class="insight '+i[0]+'">'+i[1]+'</div>'}).join("");
+
+  var order={alert:0,watch:1,info:2,ok:3};
+  rs.sort(function(a,b){return order[a.lvl]-order[b.lvl]});
+  $("#res-list").innerHTML=rs.map(function(r){
+    var m=r.m,mean="",help="";
+    if(r.dir==="high"){mean=m.high;help=m.highHelp||""}
+    else if(r.dir==="low"){mean=m.low;help=m.lowHelp||""}
+    if((r.lvl==="watch"||r.lvl==="alert")&&m.ask&&!(m.id==="dheas"&&!by.ohp))ask.push(m.ask);
+    return '<details class="res"'+(r.lvl==="ok"||r.lvl==="info"?"":" open")+'><summary><b>'+esc(m.name)+'</b><span class="val">'+esc(r.e.v)+" "+esc(r.e.u)+'</span><span class="pill '+r.lvl+'">'+esc(r.label)+'</span></summary><div class="body">'+
+      '<div><h4>In plain words</h4><p>'+m.plain+'</p></div>'+
+      (mean?'<div><h4>What this result may mean</h4><p>'+mean+'</p></div>':'')+
+      (help?'<div><h4>What helps</h4><p>'+help+'</p></div>':'')+
+      '<div><h4>Clinical detail</h4><p class="tech">'+m.tech+(r.own?" Judged against the range from your report.":(r.lvl!=="info"?" Judged against a general range; your lab's own range takes priority.":""))+'</p></div>'+
+      '</div></details>';
+  }).join("");
+
+  lastAsk=ask.filter(function(q,i){return ask.indexOf(q)===i});
+  $("#ask-card").hidden=!lastAsk.length;
+  $("#ask-list").innerHTML=lastAsk.map(function(q){return "<li>"+esc(q)+"</li>"}).join("");
+  $("#example-flag").hidden=!isExample;
+  box.hidden=false;
+  store.set("flags",flagsFrom(by));
+  return by;
+}
+function flagsFrom(by){
+  var f=[];
+  function hi(id){return by[id]&&by[id].dir==="high"}
+  if(hi("dheas")||hi("tt")||hi("freet")||hi("a4"))f.push("androgen");
+  if(hi("glu")||hi("a1c")||hi("ogtt")||hi("ins")||(by.shbg&&by.shbg.dir==="low"))f.push("insulin");
+  if(hi("ldl")||hi("tg")||hi("chol")||(by.hdl&&by.hdl.dir==="low"))f.push("lipid");
+  if(by.vitd&&by.vitd.dir==="low")f.push("vitd");
+  return f;
+}
+$("#btn-read").addEventListener("click",function(){if(explain())$("#results").scrollIntoView({behavior:"smooth",block:"start"})});
+$("#btn-copy").addEventListener("click",function(){
+  var text=lastAsk.map(function(q,i){return (i+1)+". "+q}).join("\n"),msg=$("#copy-msg");
+  function fallback(){var r=document.createRange();r.selectNodeContents($("#ask-list"));var s=getSelection();s.removeAllRanges();s.addRange(r);msg.textContent="Selected. Press copy on your keyboard."}
+  try{navigator.clipboard.writeText(text).then(function(){msg.textContent="Copied"},fallback)}catch(e){fallback()}
+});
+
+/* ---------- routine ---------- */
+var FOCI=[
+ {id:"androgen",label:"High DHEA-S or testosterone",text:"<b>High androgens.</b> Habits do not lower DHEA-S directly; medicine treats its effects. Day to day, the aim is to keep insulin steady (it amplifies androgens), protect sleep, and take prescribed treatment consistently. Give hair and skin treatments six months before judging them."},
+ {id:"insulin",label:"High glucose or insulin",text:"<b>High glucose, insulin or HbA1c, or low SHBG.</b> This responds most to routine: movement after meals, strength work twice a week, protein and fibre at each meal, and seven to nine hours of sleep. Ask about metformin."},
+ {id:"lipid",label:"Cholesterol off",text:"<b>High LDL or triglycerides, or low HDL.</b> Lean on fibre, unsaturated fats, oily fish and regular aerobic activity; limit sugary drinks and alcohol."},
+ {id:"vitd",label:"Low vitamin D",text:"<b>Low vitamin D.</b> Take the supplement dose your doctor advises with a meal, get some daylight, and recheck in about three months."},
+ {id:"cycle",label:"Irregular periods",text:"<b>Irregular or absent periods.</b> Track each bleed. If more than three months pass without one and you are not on hormonal contraception, contact your doctor so the womb lining can be protected."},
+ {id:"mood",label:"Stress, mood or sleep",text:"<b>Stress, low mood or poor sleep.</b> Keep wake time steady, get morning light, and add one short wind-down practice. If low mood or anxiety persists for two weeks or more, tell your doctor; effective treatment exists and it is part of PCOS care."}
+];
+var DAY=[
+ {when:"Morning",sub:"first hour",items:[
+  ["Wake at about the same time and get daylight within the hour","Anchors the body clock that times cortisol and improves sleep the next night.",["mood","androgen"]],
+  ["Breakfast with protein and fibre","Eggs or yoghurt with oats, fruit, or wholegrain toast. Blunts the morning glucose rise and steadies energy.",["insulin","androgen"]],
+  ["Take prescribed medicines and supplements","Same time each day. Metformin and vitamin D sit best with food.",["androgen","insulin","vitd"]]]},
+ {when:"Midday",sub:"lunch",items:[
+  ["Build a balanced plate","Half vegetables, a quarter protein, a quarter wholegrains or beans, some olive oil, nuts or avocado. No food group needs to be cut out.",["insulin","lipid"]],
+  ["Walk for 10 to 15 minutes after eating","Working muscles take up glucose without needing extra insulin.",["insulin","lipid"]]]},
+ {when:"Afternoon",sub:"or whenever suits",items:[
+  ["Move in a way you enjoy","Aim across the week for 150 minutes of moderate activity or 75 minutes of vigorous activity, plus muscle-strengthening on two non-consecutive days.",["insulin","lipid","mood","androgen"]],
+  ["Keep caffeine to before mid-afternoon","Caffeine lingers for hours and thins out deep sleep.",["mood"]],
+  ["Have a snack with protein if dinner is far off","Helps avoid the energy dip and evening cravings.",["insulin"]]]},
+ {when:"Evening",sub:"last two hours",items:[
+  ["Eat dinner at an unhurried pace","Include vegetables and protein; oily fish once or twice a week.",["lipid","insulin"]],
+  ["Ten minutes to settle the nervous system","Slow breathing, stretching, a bath, journalling, or a short guided practice. Pick one.",["mood","androgen"]],
+  ["Dim screens and keep a steady bedtime","Seven to nine hours. Short sleep worsens insulin resistance and appetite the next day.",["mood","insulin","androgen"]]]},
+ {when:"Weekly",sub:"once a week",items:[
+  ["Log your cycle","Note any bleed, and symptoms such as acne or hair changes. Patterns over months guide treatment.",["cycle","androgen"]],
+  ["Check in on mood","Notice how the week felt. Two weeks of low mood or anxiety is worth raising with your doctor.",["mood"]],
+  ["Plan two or three meals ahead","Reduces daily decisions, which is half the work.",["insulin","lipid"]]]}
+];
+var picked=store.get("foci",null);
+function renderRoutine(){
+  var auto=store.get("flags",[]);
+  if(picked===null)picked=auto.slice();
+  $("#chips").innerHTML=FOCI.map(function(f){return '<button class="chip" type="button" data-f="'+f.id+'" aria-pressed="'+(picked.indexOf(f.id)>=0)+'">'+esc(f.label)+'</button>'}).join("");
+  $("#chip-note").textContent=auto.length?"Pre-selected from the lab results you entered. Change them freely.":"Select any that apply, or enter lab results to have this done for you.";
+  $("#day").innerHTML=DAY.map(function(d){
+    return '<div class="when">'+d.when+'<small>'+d.sub+'</small></div><div class="what"><ul>'+d.items.map(function(it){
+      var em=it[2].some(function(t){return picked.indexOf(t)>=0});
+      return '<li'+(em?' class="em"':'')+'><b>'+esc(it[0])+'</b><span>'+esc(it[1])+'</span></li>'}).join("")+'</ul></div>';
+  }).join("");
+  var sel=FOCI.filter(function(f){return picked.indexOf(f.id)>=0});
+  $("#focus-card").hidden=!sel.length;
+  $("#focus-text").innerHTML=sel.map(function(f){return "<p>"+f.text+"</p>"}).join("");
+}
+$("#chips").addEventListener("click",function(ev){
+  var b=ev.target.closest(".chip");if(!b)return;
+  var i=picked.indexOf(b.dataset.f);if(i>=0)picked.splice(i,1);else picked.push(b.dataset.f);
+  store.set("foci",picked);renderRoutine();
+});
+
+/* ---------- goals ---------- */
+var GOALS=[
+ {g:"Groundwork, once",k:"once",items:[
+  ["g-rule","Confirm look-alike conditions were ruled out","17-hydroxyprogesterone, TSH and prolactin."],
+  ["g-meta","Have a baseline metabolic check","Glucose (ideally an OGTT), lipid profile and blood pressure."],
+  ["g-plan","Agree a treatment plan for your main symptom","Cycles, skin and hair, or metabolic health. One priority at a time."],
+  ["g-mood","Talk about mood and sleep at an appointment","Screening for anxiety, depression and sleep problems is part of PCOS care."]]},
+ {g:"Daily steps",k:"daily",items:[
+  ["d-light","Morning daylight",""],["d-move","Move for 20 minutes or more",""],["d-plate","Protein and fibre at two meals",""],
+  ["d-med","Take medicines as prescribed",""],["d-calm","Ten minutes of wind-down",""],["d-sleep","In bed on time",""]]},
+ {g:"Weekly rhythm",k:"weekly",items:[
+  ["w-strength","Two strength sessions",""],["w-log","Log cycle and symptoms",""],["w-kind","Do one thing purely because you enjoy it",""]]}
+];
+function today(){var d=new Date();return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate()}
+function week(){var d=new Date();var s=new Date(d.getFullYear(),0,1);return d.getFullYear()+"-w"+Math.floor((d-s)/6048e5)}
+var gs=store.get("goals",{once:{},daily:{},weekly:{},day:today(),week:week()});
+if(gs.day!==today()){gs.daily={};gs.day=today()}
+if(gs.week!==week()){gs.weekly={};gs.week=week()}
+function renderGoals(){
+  $("#goal-groups").innerHTML=GOALS.map(function(G){
+    return '<div class="card"><h3>'+G.g+'</h3>'+G.items.map(function(it){
+      return '<div class="goal"><input type="checkbox" id="'+it[0]+'" data-k="'+G.k+'"'+(gs[G.k][it[0]]?" checked":"")+'><label for="'+it[0]+'"><b>'+esc(it[1])+'</b>'+(it[2]?"<span>"+esc(it[2])+"</span>":"")+'</label></div>'}).join("")+'</div>';
+  }).join("");
+  var n=GOALS[1].items.length,done=Object.keys(gs.daily).filter(function(k){return gs.daily[k]}).length;
+  $("#bar").style.width=(done/n*100)+"%";
+  $("#goal-count").textContent=done+" of "+n+" daily steps today";
+  $("#home-progress").textContent=done?done+" of "+n+" small steps done today":"Today's small steps";
+  $("#home-progress-sub").textContent=done===n?"All done. Rest is part of the plan too.":done?"Every one of them counts.":"Nothing ticked yet. One is plenty to start.";
+}
+$("#goal-groups").addEventListener("change",function(ev){
+  var c=ev.target;if(!c.dataset.k)return;gs[c.dataset.k][c.id]=c.checked;store.set("goals",gs);
+  var y=window.scrollY;renderGoals();window.scrollTo(0,y);var el=document.getElementById(c.id);if(el)el.focus();
+});
+
+/* ---------- boot ---------- */
+renderEntries();renderGoals();route();
+if(entries.some(function(e){return e.v!==""}))explain();
+window.__steady={parseText:parseText,assess:assess};
+})();
+</script>
+<!--body-end-->
+</body>
+</html>
